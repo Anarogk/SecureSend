@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+sftp/
+sftp_project.egg-info/
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Configuration files with sensitive information
+config/*.yaml
+
+# Server key file
+server_key.pem
