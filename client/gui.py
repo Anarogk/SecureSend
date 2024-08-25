@@ -4,6 +4,7 @@ from sftp_client import SFTPClient
 
 class SFTPClientGUI:
     def __init__(self, master):
+        # Initializing main window
         self.master = master
         self.master.title("SFTP Client")
         self.client = None
@@ -31,6 +32,7 @@ class SFTPClientGUI:
         self.password_entry = tk.Entry(connection_frame, show="*")
         self.password_entry.grid(row=3, column=1)
 
+        # Button to connect to SFTP server
         self.connect_button = tk.Button(connection_frame, text="Connect", command=self.connect)
         self.connect_button.grid(row=4, column=0, columnspan=2)
 
@@ -38,19 +40,23 @@ class SFTPClientGUI:
         transfer_frame = tk.Frame(self.master)
         transfer_frame.pack(pady=10)
 
+        # Upload Button 
         self.upload_button = tk.Button(transfer_frame, text="Upload File", command=self.upload_file)
         self.upload_button.pack(side=tk.LEFT, padx=5)
 
+        # download Button
         self.download_button = tk.Button(transfer_frame, text="Download File", command=self.download_file)
         self.download_button.pack(side=tk.LEFT, padx=5)
 
     def connect(self):
+        # connection details
         host = self.host_entry.get()
         port = int(self.port_entry.get())
         username = self.username_entry.get()
         password = self.password_entry.get()
 
         try:
+            # initializing client and connecting to server
             self.client = SFTPClient(host, port, username, password)
             self.client.connect()
             messagebox.showinfo("Connection", "Successfully connected to the SFTP server.")
@@ -58,6 +64,7 @@ class SFTPClientGUI:
             messagebox.showerror("Connection Error", str(e))
 
     def upload_file(self):
+        # ensuring Connection
         if not self.client:
             messagebox.showerror("Error", "Please connect to the server first.")
             return
@@ -76,7 +83,7 @@ class SFTPClientGUI:
         if not self.client:
             messagebox.showerror("Error", "Please connect to the server first.")
             return
-
+        # prompt to enter path to download
         remote_path = filedialog.askstring("Remote Path", "Enter the remote file path:")
         if remote_path:
             local_path = filedialog.asksaveasfilename()
